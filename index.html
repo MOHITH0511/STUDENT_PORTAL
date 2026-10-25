@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Smart Student Portal demo for attendance, marks, timetable, study planning and study suggestions.">
+  <title>Smart Student Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">R</div>
+        <div><strong>Campus<span>ly</span></strong><small>STUDENT PORTAL</small></div>
+      </div>
+      <div class="profile-mini">
+        <div class="avatar">RM</div>
+        <div><strong>R.MOHITH</strong><small>CSE • AI &amp; ML</small></div>
+      </div>
+      <nav class="nav-menu" aria-label="Main navigation">
+        <button class="nav-item active" data-section="dashboard"><span>▦</span> Dashboard</button>
+        <button class="nav-item" data-section="attendance"><span>◷</span> Attendance</button>
+        <button class="nav-item" data-section="marks"><span>▤</span> Marks &amp; Grades</button>
+        <button class="nav-item" data-section="timetable"><span>▦</span> Timetable</button>
+        <button class="nav-item" data-section="planner"><span>✓</span> Study Planner</button>
+        <button class="nav-item" data-section="assistant"><span>✦</span> AI Study Assistant</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card"><div class="help-icon">?</div><strong>Need a hand?</strong><p>Use the study assistant to plan your next study session.</p><button id="helpButton">Open assistant ↗</button></div>
+        <div class="sidebar-foot">Student demo • 2026</div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Open navigation">☰</button>
+        <div class="breadcrumb">Workspace <span>/</span> <strong id="breadcrumbCurrent">Dashboard</strong></div>
+        <div class="top-actions"><span class="status-pill"><i></i> Demo mode</span><button class="icon-button" id="resetButton" title="Reset demo data" aria-label="Reset demo data">↻</button><div class="top-avatar">RM</div></div>
+      </header>
+
+      <section class="page-section active" id="section-dashboard">
+        <div class="page-heading">
+          <div><p class="eyebrow">MONDAY, YOUR LEARNING SPACE</p><h1>Good morning, R.MOHITH <span class="wave">✦</span></h1><p class="muted">Here's what's happening with your studies today.</p></div>
+          <button class="primary-button" data-go="planner">＋ Add study task</button>
+        </div>
+        <div class="notice"><span class="notice-symbol">ⓘ</span><div><strong>Demo student data</strong><p>Attendance, marks, and timetable details are sample data for this project prototype. They are not connected to university records.</p></div><button class="notice-close" id="dismissNotice" aria-label="Dismiss notice">×</button></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Overall attendance</span><span class="stat-icon blue">◷</span></div><div class="stat-value">86.4<span>%</span></div><div class="stat-bottom"><span class="trend positive">↑ 2.4%</span><span>this month</span></div><div class="mini-progress"><i style="width:86.4%"></i></div></article>
+          <article class="stat-card"><div class="stat-top"><span>Average score</span><span class="stat-icon purple">▤</span></div><div class="stat-value">82<span>/100</span></div><div class="stat-bottom"><span class="trend positive">Good progress</span><span>across subjects</span></div><div class="mini-progress purple-progress"><i style="width:82%"></i></div></article>
+          <article class="stat-card"><div class="stat-top"><span>Tasks completed</span><span class="stat-icon green">✓</span></div><div class="stat-value" id="taskStat">3<span>/5</span></div><div class="stat-bottom"><span class="trend positive">Keep going</span><span>this week</span></div><div class="mini-progress green-progress"><i id="taskProgress" style="width:60%"></i></div></article>
+          <article class="stat-card"><div class="stat-top"><span>Study streak</span><span class="stat-icon orange">⚡</span></div><div class="stat-value">5<span> days</span></div><div class="stat-bottom"><span class="trend orange-text">You're on a roll</span><span>keep it up</span></div><div class="streak-dots"><i></i><i></i><i></i><i></i><i></i><b></b><b></b></div></article>
+        </div>
+        <div class="content-grid">
+          <article class="panel attendance-panel">
+            <div class="panel-heading"><div><h2>Attendance overview</h2><p class="muted">Your attendance by subject</p></div><button class="text-button" data-go="attendance">View details ↗</button></div>
+            <div id="dashboardAttendance" class="subject-bars"></div>
+          </article>
+          <article class="panel upcoming-panel">
+            <div class="panel-heading"><div><h2>Today's schedule</h2><p class="muted">Your next classes</p></div><button class="text-button" data-go="timetable">Full timetable ↗</button></div>
+            <div id="todaySchedule" class="schedule-list"></div>
+          </article>
+        </div>
+        <div class="content-grid lower-grid">
+          <article class="panel tasks-panel"><div class="panel-heading"><div><h2>Study tasks</h2><p class="muted">Small steps make progress</p></div><button class="text-button" data-go="planner">Manage tasks ↗</button></div><div id="dashboardTasks" class="task-list"></div></article>
+          <article class="panel tip-panel"><div class="tip-art">✦</div><p class="eyebrow">STUDY TIP OF THE DAY</p><h2>Study smarter, not longer.</h2><p class="muted">Try a 25-minute focused session, then take a 5-minute break. Repeat four times before taking a longer break.</p><button class="secondary-button" data-go="assistant">Get a study suggestion ↗</button></article>
+        </div>
+        <p class="page-footer">Made for learning • Smart Student Portal prototype</p>
+      </section>
+
+      <section class="page-section" id="section-attendance">
+        <div class="page-heading"><div><p class="eyebrow">YOUR CLASS PARTICIPATION</p><h1>Attendance</h1><p class="muted">Track attendance in each subject and identify where you may need improvement.</p></div><span class="big-metric">86.4% <small>overall</small></span></div>
+        <div class="notice"><span class="notice-symbol">ⓘ</span><div><strong>Sample attendance records</strong><p>These values are fictional examples. Confirm official attendance with your university.</p></div></div>
+        <article class="panel"><div class="panel-heading"><div><h2>Subject-wise attendance</h2><p class="muted">Target attendance: 75%</p></div><span class="legend"><i></i> Above target <i class="legend-low"></i> Below target</span></div><div id="attendanceDetails" class="attendance-table"></div></article>
+      </section>
+
+      <section class="page-section" id="section-marks">
+        <div class="page-heading"><div><p class="eyebrow">ACADEMIC PERFORMANCE</p><h1>Marks &amp; Grades</h1><p class="muted">Review sample scores and see which subjects deserve extra practice.</p></div><span class="big-metric">82/100 <small>average score</small></span></div>
+        <div class="stats-grid compact-stats"><article class="stat-card"><div class="stat-top"><span>Highest score</span><span class="stat-icon green">↗</span></div><div class="stat-value">91<span>/100</span></div><div class="stat-bottom"><span>Java Programming</span></div></article><article class="stat-card"><div class="stat-top"><span>Subjects tracked</span><span class="stat-icon blue">▤</span></div><div class="stat-value">5</div><div class="stat-bottom"><span>Sample records</span></div></article><article class="stat-card"><div class="stat-top"><span>Current status</span><span class="stat-icon purple">✦</span></div><div class="stat-value status-value">On track</div><div class="stat-bottom"><span>Keep revising regularly</span></div></article></div>
+        <article class="panel"><div class="panel-heading"><div><h2>Subject scorecard</h2><p class="muted">Sample internal assessment marks</p></div><span class="badge">Demo data</span></div><div id="marksTable" class="marks-table"></div></article>
+      </section>
+
+      <section class="page-section" id="section-timetable">
+        <div class="page-heading"><div><p class="eyebrow">PLAN YOUR DAY</p><h1>Class timetable</h1><p class="muted">A sample weekly schedule to help organize your time.</p></div><span class="badge">Sample schedule</span></div>
+        <div class="day-tabs" id="dayTabs"><button class="day-tab active" data-day="Monday">Mon</button><button class="day-tab" data-day="Tuesday">Tue</button><button class="day-tab" data-day="Wednesday">Wed</button><button class="day-tab" data-day="Thursday">Thu</button><button class="day-tab" data-day="Friday">Fri</button><button class="day-tab" data-day="Saturday">Sat</button></div>
+        <article class="panel"><div class="panel-heading"><div><h2 id="timetableDayTitle">Monday's classes</h2><p class="muted">Class times and rooms are examples.</p></div><span class="small-calendar">▦ Weekly view</span></div><div id="timetableList" class="timetable-list"></div></article>
+      </section>
+
+      <section class="page-section" id="section-planner">
+        <div class="page-heading"><div><p class="eyebrow">MAKE TIME FOR WHAT MATTERS</p><h1>Study planner</h1><p class="muted">Create tasks, track your progress, and build a consistent study routine.</p></div></div>
+        <article class="panel add-task-panel"><div class="panel-heading"><div><h2>Add a study task</h2><p class="muted">Keep each task clear and manageable.</p></div></div><form id="taskForm" class="task-form"><label>Task name<input id="taskName" type="text" maxlength="90" placeholder="e.g. Revise graph theory" required></label><label>Subject<select id="taskSubject"><option>Discrete Mathematics</option><option>Java Programming</option><option>Computer Networks</option><option>Machine Learning</option><option>Operating Systems</option><option>General Study</option></select></label><label>Due date<input id="taskDate" type="date"></label><button class="primary-button" type="submit">＋ Add task</button></form></article>
+        <div class="planner-summary"><div><strong id="plannerTotal">5</strong><span>Total tasks</span></div><div><strong id="plannerCompleted">3</strong><span>Completed</span></div><div><strong id="plannerPending">2</strong><span>Pending</span></div></div>
+        <article class="panel"><div class="panel-heading"><div><h2>Your tasks</h2><p class="muted">Tick a task when you finish it.</p></div><button class="text-button" id="clearCompleted">Clear completed</button></div><div id="plannerTasks" class="task-list full-task-list"></div></article>
+      </section>
+
+      <section class="page-section" id="section-assistant">
+        <div class="page-heading"><div><p class="eyebrow">YOUR PERSONAL STUDY COMPANION</p><h1>AI Study Assistant <span class="sparkle">✦</span></h1><p class="muted">Get a suggested study plan based on your subject and confidence level.</p></div></div>
+        <div class="assistant-layout">
+          <article class="panel assistant-form-panel"><div class="assistant-icon">✦</div><h2>What are you working on?</h2><p class="muted">Choose a subject and tell us how you're feeling about it.</p><form id="assistantForm"><label>Choose subject<select id="assistantSubject"><option>Discrete Mathematics</option><option>Java Programming</option><option>Computer Networks</option><option>Machine Learning</option><option>Operating Systems</option></select></label><label>Confidence level<select id="confidence"><option value="low">I find it difficult</option><option value="medium" selected>I understand some topics</option><option value="high">I feel confident</option></select></label><label>Available study time<select id="studyTime"><option value="15">15 minutes</option><option value="30" selected>30 minutes</option><option value="45">45 minutes</option><option value="60">60 minutes</option></select></label><button class="primary-button full-width" type="submit">Generate study suggestion ✦</button></form><p class="demo-disclaimer">Demo assistant: suggestions are generated from built-in rules. No live AI model or external AI service is connected.</p></article>
+          <article class="panel suggestion-panel"><div class="suggestion-header"><div><p class="eyebrow">YOUR STUDY PLAN</p><h2 id="suggestionTitle">A balanced study session</h2></div><span class="suggestion-star">✧</span></div><p class="muted" id="suggestionIntro">Choose your subject and select “Generate study suggestion” to create a focused plan.</p><div id="suggestionSteps" class="suggestion-steps"><div class="empty-step"><span>01</span><p>Pick a subject and your available time.</p></div><div class="empty-step"><span>02</span><p>Get a short, actionable study plan.</p></div><div class="empty-step"><span>03</span><p>Turn the plan into a task in your planner.</p></div></div><button class="secondary-button" id="addSuggestionTask" disabled>＋ Add plan as a task</button></article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
